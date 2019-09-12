@@ -3,6 +3,7 @@
     <property name="LOG_LEVEL" value="info"/>
     <property name="LOG_LEVEL_FOR_PAKAGE" value="info"/>
     <property name="LOG_LEVEL_FOR_MYBATIS" value="debug"/>
+    <property name="LOG_LEVEL_FOR_SECURITY" value="debug"/>
     <!--<property name="FILE_PATH" value="/Users/leesanghyuk/Desktop/BounjourMonde/outsourcing/log"/>-->
     <!--<property name="LOG_PATTERN"-->
     <!--value="%date{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n"/>-->
@@ -39,6 +40,7 @@
     <!--设置包默认级别-->
     <logger name="com.energy.simulation" level="${LOG_LEVEL_FOR_PAKAGE}"/>
     <logger name="com.energy.simulation.mybatis" level="${LOG_LEVEL_FOR_MYBATIS}" />
+    <!--<logger name="com.energy.simulation.config" level="${LOG_LEVEL_FOR_SECURITY}"/>-->
     <!--<logger name="com.energy.simulation" additivity="true">-->
     <!--<appender-ref ref="fileErrorLog"/>-->
     <!--<level value="${LOG_LEVEL_FOR_PAKAGE}"/>-->

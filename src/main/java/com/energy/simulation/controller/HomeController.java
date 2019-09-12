@@ -1,14 +1,17 @@
 package com.energy.simulation.controller;
 
 import com.energy.simulation.mybatis.entity.dto.TestDTO;
+import com.energy.simulation.mybatis.entity.dto.UserDTO;
+import com.energy.simulation.mybatis.entity.query.User;
 import com.energy.simulation.service.TestService;
 import com.energy.simulation.util.VO.ResultVO;
 import com.energy.simulation.util.ResultVOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Author: leesanghyuk
@@ -28,13 +31,30 @@ public class HomeController {
         return "home";
     }
 
+//    @ResponseBody
+//    @RequestMapping("/error")
+//    public String error(){
+//        return "error";
+//    }
+
     @ResponseBody
-    @RequestMapping("/data")
-    public ResultVO<TestDTO> getDTOtest(){
-        log.error("【error】回传energyConfigurationDTO");
-        log.debug("【debug】回传energyConfigurationDTO");
-        log.info("【info】回传energyConfigurationDTO");
-        return ResultVOUtil.success(new TestDTO("name",1.11));
+    @RequestMapping(value = "/data",method = RequestMethod.POST)
+    public ResultVO<User> getDTOtest(@Valid @RequestBody User user, BindingResult errors){
+        if (errors.hasErrors())
+            log.error("【error!!!!!!!!!!!!!】");
+        log.error("【error】name:{},password:{}",user.getUsername(),user.getPassword());
+        return ResultVOUtil.success(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/data2",method = RequestMethod.GET)
+    public ResultVO<UserDTO> getDTOtest(@RequestParam("username") String name,@RequestParam String password){
+        //http://localhost:8080/data2?username=1&password=2
+        UserDTO userDTO=new UserDTO();
+        userDTO.setName(name);
+        userDTO.setPassword(password);
+        log.error("【error】name:{},password:{}",userDTO.getName(),userDTO.getPassword());
+        return ResultVOUtil.success(userDTO);
     }
 
     @ResponseBody
