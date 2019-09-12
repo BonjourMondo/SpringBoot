@@ -1,0 +1,46 @@
+<configuration>
+
+    <property name="LOG_LEVEL" value="info"/>
+    <property name="LOG_LEVEL_FOR_PAKAGE" value="info"/>
+    <property name="LOG_LEVEL_FOR_MYBATIS" value="debug"/>
+    <!--<property name="FILE_PATH" value="/Users/leesanghyuk/Desktop/BounjourMonde/outsourcing/log"/>-->
+    <!--<property name="LOG_PATTERN"-->
+    <!--value="%date{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n"/>-->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%highlight(%-5level) | %boldYellow(%msg)  |%logger%n"/>
+    <property name="FILE_LOG_PATTERN" value="%date %-5level [%file:%line] %msg%n%ex"/>
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--<appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<encoder>-->
+    <!--<pattern>-->
+    <!--${FILE_LOG_PATTERN}-->
+    <!--</pattern>-->
+    <!--</encoder>-->
+    <!--&lt;!&ndash;滚动策略&ndash;&gt;-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--&lt;!&ndash;路径&ndash;&gt;-->
+    <!--<fileNamePattern>${FILE_PATH}/error1.%d.log</fileNamePattern>-->
+    <!--</rollingPolicy>-->
+    <!--</appender>-->
+
+    <!--<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>-->
+
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="consoleLog"/>
+        <!--<appender-ref ref="fileInfoLog" />-->
+        <!--<appender-ref ref="fileErrorLog"/>-->
+    </root>
+    <!--设置包默认级别-->
+    <logger name="com.energy.simulation" level="${LOG_LEVEL_FOR_PAKAGE}"/>
+    <logger name="com.energy.simulation.mybatis" level="${LOG_LEVEL_FOR_MYBATIS}" />
+    <!--<logger name="com.energy.simulation" additivity="true">-->
+    <!--<appender-ref ref="fileErrorLog"/>-->
+    <!--<level value="${LOG_LEVEL_FOR_PAKAGE}"/>-->
+    <!--</logger>-->
+</configuration>
