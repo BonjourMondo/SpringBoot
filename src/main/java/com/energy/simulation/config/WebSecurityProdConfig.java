@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-@Profile(value = {"dev"})
+@Profile(value = {"prod"})
 public class WebSecurityProdConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,16 +31,16 @@ public class WebSecurityProdConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/login").permitAll()//根路径和/login路径不拦截
+                .antMatchers("/login").permitAll()//根路径和/login路径不拦截
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()//指定表单登陆
-//                .loginPage("/login") //登陆页面
-//                .defaultSuccessUrl("/home") //登陆成功转向该页面
-//                .permitAll()
-//                .and()
-//                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
-//                .permitAll()
+                .loginPage("/login") //登陆页面
+                .defaultSuccessUrl("/home") //登陆成功转向该页面
+                .permitAll()
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
+                .permitAll()
         ;
 
     }

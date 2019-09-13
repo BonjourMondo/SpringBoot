@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.energy.simulation.mybatis.dao.SimulationAuthMapper">
+    <sql id="USER_INFO_COL">
+        id,username,role,password
+    </sql>
+    <select id="selectUserByUsername" parameterType="String" 
+            resultType="com.energy.simulation.mybatis.entity.dto.SimulationUserInfoDTO">
+        SELECT <include refid="USER_INFO_COL" /> FROM SimulationUserInfo WHERE username=#{username}
+    </select>
+</mapper>

@@ -1,6 +1,6 @@
 package com.energy.simulation.config.security;
 
-import com.energy.simulation.mybatis.entity.dto.UserDTO;
+import com.energy.simulation.mybatis.entity.dto.SimulationUserInfoDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,12 +14,12 @@ import java.util.Collection;
  * Description:
  */
 public class SecurityUser implements UserDetails {
-    private UserDTO user;
+    private SimulationUserInfoDTO user;
     /**
      *
      */
     private static final long serialVersionUID = -1623385418837308233L;
-    public SecurityUser(UserDTO u){
+    public SecurityUser(SimulationUserInfoDTO u){
         this.user=u;
     }
 
@@ -41,7 +41,7 @@ public class SecurityUser implements UserDetails {
     @Override
     public String getUsername() {
         // TODO Auto-generated method stub
-        return this.user.getName();
+        return this.user.getUsername();
     }
 
     @Override
@@ -64,12 +64,8 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-//        if(this.user.getState()==2){
-//            return false;
-//        }else{
-//            return true;
-//        }
         return true;
     }
+
 
 }

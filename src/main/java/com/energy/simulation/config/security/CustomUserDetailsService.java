@@ -1,6 +1,8 @@
 package com.energy.simulation.config.security;
 
+import com.energy.simulation.mybatis.dao.SimulationAuthMapper;
 import com.energy.simulation.mybatis.dao.UserAuthMapper;
+import com.energy.simulation.mybatis.entity.dto.SimulationUserInfoDTO;
 import com.energy.simulation.mybatis.entity.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
-//    @Autowired
-//    private UserAuthMapper userAuthMapper;
+    @Autowired
+    private SimulationAuthMapper simulationAuthMapper;
 
     /**
      * 根据用户名判断是否找到用户信息
@@ -30,12 +32,13 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        UserDTO user = userAuthMapper.findUser(username);
-//        if (user == null) {
-//            throw new UsernameNotFoundException(username);
-//        }
-//        return new SecurityUser(user);
-        return new User("user","123456",
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        SimulationUserInfoDTO simulationUserInfoDTO=simulationAuthMapper.selectUserByUsername(username);
+        if (simulationUserInfoDTO == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        log.info("【登陆用户名：{},密码：{}】",simulationUserInfoDTO.getUsername(),simulationUserInfoDTO.getPassword());
+        return new SecurityUser(simulationUserInfoDTO);
+//        return new User("user","123456",
+//                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }
