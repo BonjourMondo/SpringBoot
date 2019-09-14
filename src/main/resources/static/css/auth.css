@@ -11,6 +11,13 @@ body {
 	margin-bottom: 20px;
 	text-align: center;
 }
+.lowin_span {
+	color: var(--color-semidark);
+	font-weight: 800;
+	font-size: medium;
+	margin-bottom: 20px;
+	text-align: center;
+}
 
 .lowin {
 	/* variables */

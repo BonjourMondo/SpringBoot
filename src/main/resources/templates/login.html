@@ -19,9 +19,8 @@
 		<div class="lowin-wrapper">
 			<div class="lowin-box lowin-login">
 				<div class="lowin-box-inner">
-					<!--<p th:text="${message}"></p>-->
-					<form href="/login" method="post">
-						<p>Sign in to continue</p>
+					<form th:action="@{/login}" method="post">
+						<p th:text="${auth}"></p>
 						<div class="lowin-group">
 							<label>Username <a href="#" class="login-back-link">Sign in?</a></label>
 							<input type="text" name="username" class="lowin-input">

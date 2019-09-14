@@ -38,7 +38,7 @@ public class WebSecurityProdConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login") //登陆页面
 //                .loginProcessingUrl("/authentication/form")
                 .defaultSuccessUrl("/home") //登陆成功转向该页面
-//                .failureForwardUrl("/login?auth=fail")
+                .failureUrl("/login?auth=fail")
                 .permitAll()
                 .and()
                 .csrf().disable()
