@@ -1,13 +1,9 @@
 package com.energy.simulation.config.security;
 
 import com.energy.simulation.mybatis.dao.SimulationAuthMapper;
-import com.energy.simulation.mybatis.dao.UserAuthMapper;
 import com.energy.simulation.mybatis.entity.dto.SimulationUserInfoDTO;
-import com.energy.simulation.mybatis.entity.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

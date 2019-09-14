@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-@Profile(value = {"prod"})
+@Profile(value = {"dev"})
 public class WebSecurityProdConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,23 +31,27 @@ public class WebSecurityProdConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()//根路径和/login路径不拦截
+                .antMatchers("/","/login").permitAll()//根路径和/login路径不拦截
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()//指定表单登陆
                 .loginPage("/login") //登陆页面
+//                .loginProcessingUrl("/authentication/form")
                 .defaultSuccessUrl("/home") //登陆成功转向该页面
+//                .failureForwardUrl("/login?auth=fail")
                 .permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
-                .permitAll()
+                .csrf().disable()
+//                .and()
+//                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
+//                .permitAll()
         ;
 
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/static/**", "/informationFeedback", "/js/**", "/error");
+        web.ignoring().antMatchers( "/css/**", "/js/**", "/images/**", "/error");
     }
 
     @Override

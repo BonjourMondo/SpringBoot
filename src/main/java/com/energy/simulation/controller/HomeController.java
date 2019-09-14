@@ -1,11 +1,10 @@
 package com.energy.simulation.controller;
 
-import com.energy.simulation.mybatis.entity.dto.TestDTO;
 import com.energy.simulation.mybatis.entity.dto.UserDTO;
 import com.energy.simulation.mybatis.entity.query.User;
 import com.energy.simulation.service.TestService;
-import com.energy.simulation.util.VO.ResultVO;
 import com.energy.simulation.util.ResultVOUtil;
+import com.energy.simulation.util.VO.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -19,17 +18,17 @@ import javax.validation.Valid;
  * Description:
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/simulation")
 @Slf4j
 public class HomeController {
     @Autowired
     private TestService testService;
 
-    @ResponseBody
-    @RequestMapping("/login")
-    public String login(){
-        return "home";
-    }
+//    @ResponseBody
+//    @RequestMapping("/home")
+//    public String home(){
+//        return "home";
+//    }
 
 //    @ResponseBody
 //    @RequestMapping("/error")
