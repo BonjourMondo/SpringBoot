@@ -1,6 +1,9 @@
 package com.energy.simulation.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -21,15 +24,23 @@ import java.io.IOException;
 public class BrowserSecurityController {
 
     @RequestMapping(value = {"/login","/"})
-    public String showLogin(@RequestParam(name = "auth",required = false) String auth, Model model) {
-        if (!StringUtils.isEmpty(auth)&& "fail".equalsIgnoreCase(auth)){
-            log.info("【登陆失败】auth验证失败，用户账号或者密码错误");
-            //账号或密码错误
-            model.addAttribute("auth","No such user or wrong password");
+    public String showLogin(@RequestParam(name = "auth",required = false) String auth, Model model,HttpServletResponse httpServletResponse) throws IOException {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            if (!StringUtils.isEmpty(auth) && "fail".equalsIgnoreCase(auth)) {
+                log.info("【登陆失败】auth验证失败，用户账号或者密码错误");
+                //账号或密码错误
+                model.addAttribute("auth", "No such user or wrong password");
+            } else {
+                model.addAttribute("auth", "Sign in to continue");
+            }
+            return "login";
         }else{
-            model.addAttribute("auth","Sign in to continue");
+            log.info("【用户已登陆】跳转到首页");
+            httpServletResponse.sendRedirect("http://localhost:9090");
+            return null;
         }
-        return "login";
     }
 
     @RequestMapping("/home")
