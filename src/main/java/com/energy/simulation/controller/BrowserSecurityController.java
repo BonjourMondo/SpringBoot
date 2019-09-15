@@ -23,7 +23,12 @@ import java.io.IOException;
 @RequestMapping("/")
 public class BrowserSecurityController {
 
-    @RequestMapping(value = {"/login","/"})
+    @RequestMapping
+    public void toLogin(HttpServletResponse httpServletResponse) throws IOException {
+        httpServletResponse.sendRedirect("/home");
+    }
+
+    @RequestMapping("/login")
     public String showLogin(@RequestParam(name = "auth",required = false) String auth, Model model,HttpServletResponse httpServletResponse) throws IOException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

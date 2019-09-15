@@ -31,7 +31,7 @@ public class WebSecurityProdConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/login").permitAll()//根路径和/login路径不拦截
+                .antMatchers("/","/login").permitAll()//login路径不拦截
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()//指定表单登陆
