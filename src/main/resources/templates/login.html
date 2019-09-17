@@ -42,11 +42,11 @@
 
 			<div class="lowin-box lowin-register">
 				<div class="lowin-box-inner">
-					<form>
+					<form th:action="@{/register}" method="post">
 						<p>Let's create your account</p>
 						<div class="lowin-group">
-							<label>Name</label>
-							<input type="text" name="name" autocomplete="name" class="lowin-input">
+							<label>Username</label>
+							<input type="text" name="username" autocomplete="username" class="lowin-input">
 						</div>
 						<div class="lowin-group">
 							<label>Email</label>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<footer class="lowin-footer">
 			Design By @LeesangHyuk.
 		</footer>
